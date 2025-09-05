@@ -1,463 +1,232 @@
-<!DOCTYPE html><!DOCTYPE html>
-
-<html lang="en"><html lang="en">
-
-<head><head>
-
-    <meta charset="UTF-8">    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>RustyBot Discord - EVE Online Discord Bot</title>    <title>RustyBot Discord - EVE Online Discord Bot</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
-
-        
-
-    <!-- Add a favicon for the browser tab -->    <!-- Add a favicon for the browser tab -->
-
-    <link rel="icon" type="image/png" href="logo.png">    <link rel="icon" type="image/png" href="logo.png">
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RustyBot Discord - EVE Online Discord Bot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Add a favicon for the browser tab -->
+    <link rel="icon" type="image/png" href="logo.png">
 
     <style>
-
-        :root {        :root {
-
-            --bg-color: #121212;            --bg-color: #121212;
-
-            --primary-color: #1e1e1e;            --primary-color: #1e1e1e;
-
-            --secondary-color: #2a2a2a;            --secondary-color: #2a2a2a;
-
-            --text-color: #e0e0e0;            --text-color: #e0e0e0;
-
-            --accent-color: #c97b5a; /* A rusty-orange color sampled from your logo */            --accent-color: #c97b5a; /* A rusty-orange color sampled from your logo */
-
-            --header-font: 'Titillium Web', sans-serif;            --header-font: 'Titillium Web', sans-serif;
-
-        }        }
-
-
-
-        body {        body {
-
-            background-color: var(--bg-color);            background-color: var(--bg-color);
-
-            color: var(--text-color);            color: var(--text-color);
-
-            font-family: var(--header-font);            font-family: var(--header-font);
-
-            margin: 0;            margin: 0;
-
-            padding: 0;            padding: 0;
-
-            line-height: 1.6;            line-height: 1.6;
-
-        }        }
-
-
-
-        .container {        .container {
-
-            max-width: 960px;            max-width: 960px;
-
-            margin: 0 auto;            margin: 0 auto;
-
-            padding: 20px;            padding: 20px;
-
-        }        }
-
-
-
-        header {        header {
-
-            text-align: center;            text-align: center;
-
-            padding: 4rem 1rem;            padding: 4rem 1rem;
-
-        }        }
-
-                
-
-        /* Style for the new logo */        /* Style for the new logo */
-
-        .logo {        .logo {
-
-            max-width: 180px; /* Controls the size of the logo */            max-width: 180px; /* Controls the size of the logo */
-
-            margin-bottom: 2rem; /* Adds space between the logo and the title */            margin-bottom: 2rem; /* Adds space between the logo and the title */
-
-        }        }
-
-
-
-        header h1 {        header h1 {
-
-            font-size: 3.5rem;            font-size: 3.5rem;
-
-            margin-bottom: 0.5rem;            margin-bottom: 0.5rem;
-
-            font-weight: 700;            font-weight: 700;
-
-        }        }
-
-
-
-        header h1 span {        header h1 span {
-
-            color: var(--accent-color);            color: var(--accent-color);
-
-        }        }
-
-
-
-        header p {        header p {
-
-            font-size: 1.2rem;            font-size: 1.2rem;
-
-            color: #aaa;            color: #aaa;
-
-        }        }
-
-
-
-        .cta-button {        .cta-button {
-
-            display: inline-block;            display: inline-block;
-
-            background-color: var(--accent-color);            background-color: var(--accent-color);
-
-            color: #fff;            color: #fff;
-
-            padding: 15px 30px;            padding: 15px 30px;
-
-            text-decoration: none;            text-decoration: none;
-
-            border-radius: 5px;            border-radius: 5px;
-
-            font-size: 1.2rem;            font-size: 1.2rem;
-
-            font-weight: 600;            font-weight: 600;
-
-            margin-top: 1.5rem;            margin-top: 1.5rem;
-
-            transition: background-color 0.3s ease, transform 0.2s ease;            transition: background-color 0.3s ease, transform 0.2s ease;
-
-        }        }
-
-
-
-        .cta-button:hover {        .cta-button:hover {
-
-            background-color: #b36a4a; /* A slightly darker shade for hover */            background-color: #b36a4a; /* A slightly darker shade for hover */
-
-            transform: translateY(-2px);            transform: translateY(-2px);
-
-        }        }
-
-                
-
-        section {        section {
-
-            padding: 2rem 1rem;            padding: 2rem 1rem;
-
-            border-top: 1px solid var(--secondary-color);            border-top: 1px solid var(--secondary-color);
-
-        }        }
-
-
-
-        h2 {        h2 {
-
-            text-align: center;            text-align: center;
-
-            font-size: 2.5rem;            font-size: 2.5rem;
-
-            margin-bottom: 3rem;            margin-bottom: 3rem;
-
-            color: var(--accent-color);            color: var(--accent-color);
-
-        }        }
-
-
-
-        .features-grid {        .features-grid {
-
-            display: grid;            display: grid;
-
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-
-            gap: 2rem;            gap: 2rem;
-
-        }        }
-
-
-
-        .feature-card {        .feature-card {
-
-            background-color: var(--primary-color);            background-color: var(--primary-color);
-
-            padding: 2rem;            padding: 2rem;
-
-            border-radius: 8px;            border-radius: 8px;
-
-            border: 1px solid var(--secondary-color);            border: 1px solid var(--secondary-color);
-
-            text-align: center;            text-align: center;
-
-        }        }
-
-                
-
-        .feature-card h3 {        .feature-card h3 {
-
-            font-size: 1.5rem;            font-size: 1.5rem;
-
-            margin-top: 0;            margin-top: 0;
-
-        }        }
-
-
-
-        .commands-table {        .commands-table {
-
-            width: 100%;            width: 100%;
-
-            border-collapse: collapse;            border-collapse: collapse;
-
-            background-color: var(--primary-color);            background-color: var(--primary-color);
-
-        }        }
-
-                
-
-        .commands-table th, .commands-table td {        .commands-table th, .commands-table td {
-
-            padding: 15px;            padding: 15px;
-
-            text-align: left;            text-align: left;
-
-            border-bottom: 1px solid var(--secondary-color);            border-bottom: 1px solid var(--secondary-color);
-
-        }        }
-
-                
-
-        .commands-table th {        .commands-table th {
-
-            font-size: 1.1rem;            font-size: 1.1rem;
-
-        }        }
-
-
-
-        .commands-table code {        .commands-table code {
-
-            background-color: var(--secondary-color);            background-color: var(--secondary-color);
-
-            padding: 4px 8px;            padding: 4px 8px;
-
-            border-radius: 4px;            border-radius: 4px;
-
-            font-family: monospace;            font-family: monospace;
-
-        }        }
-
-                
-
-        footer {        footer {
-
-            text-align: center;            text-align: center;
-
-            padding: 2rem;            padding: 2rem;
-
-            margin-top: 2rem;            margin-top: 2rem;
-
-            border-top: 1px solid var(--secondary-color);            border-top: 1px solid var(--secondary-color);
-
-            color: #777;            color: #777;
-
-        }        }
-
-                
-
-        footer a {        footer a {
-
-            color: var(--accent-color);            color: var(--accent-color);
-
-            text-decoration: none;            text-decoration: none;
-
-        }        }
-
-    </style>    </style>
-
-</head></head>
-
-<body><body>
-
-
-
-    <header>    <header>
-
-        <div class="container">        <div class="container">
-
-            <!-- Your logo is added here -->            <!-- Your logo is added here -->
-
-            <img src="logo.png" alt="RustyBot Discord Logo" class="logo">            <img src="logo.png" alt="RustyBot Discord Logo" class="logo">
-
-                        
-
-            <h1>Welcome to <span>RustyBot Discord</span></h1>            <h1>Welcome to <span>RustyBot Discord</span></h1>
-
-            <p>Your all-in-one EVE Online market and utility assistant for Discord.</p>            <p>Your all-in-one EVE Online market and utility assistant for Discord.</p>
-
-            <!-- TODO: Replace '#' with your actual bot invite link -->            <!-- TODO: Replace '#' with your actual bot invite link -->
-
-            <a href="#" class="cta-button">Add RustyBot Discord to Your Server</a>            <a href="#" class="cta-button">Add RustyBot Discord to Your Server</a>
-
-        </div>        </div>
-
-    </header>    </header>
-
-
-
-    <main class="container">    <main class="container">
-
-        <section id="features">        <section id="features">
-
-            <h2>Features</h2>            <h2>Features</h2>
-
-            <div class="features-grid">            <div class="features-grid">
-
-                <div class="feature-card">                <div class="feature-card">
-
-                    <h3>Real-time Market Data</h3>                    <h3>Real-time Market Data</h3>
-
-                    <p>Get live market prices for any item from all major EVE trade hubs, including Jita, Amarr, and Dodixie.</p>                    <p>Get live market prices for any item from all major EVE trade hubs, including Jita, Amarr, and Dodixie.</p>
-
-                </div>                </div>
-
-                <div class="feature-card">                <div class="feature-card">
-
-                    <h3>D-Scan Parser</h3>                    <h3>D-Scan Parser</h3>
-
-                    <p>Paste directional scan results into a clean form and get an instant, categorized breakdown of all ships on scan.</p>                    <p>Paste directional scan results into a clean form and get an instant, categorized breakdown of all ships on scan.</p>
-
-                </div>                </div>
-
-                <div class="feature-card">                <div class="feature-card">
-
-                    <h3>LP Store Analysis</h3>                    <h3>LP Store Analysis</h3>
-
-                    <p>Analyze and compare Loyalty Point store offers to find the most profitable items to cash in your LP.</p>                    <p>Analyze and compare Loyalty Point store offers to find the most profitable items to cash in your LP.</p>
-
-                </div>                </div>
-
-            </div>            </div>
-
-        </section>        </section>
-
-
-
-        <section id="commands">        <section id="commands">
-
-            <h2>Commands</h2>            <h2>Commands</h2>
-
-            <table class="commands-table">            <table class="commands-table">
-
-                <thead>                <thead>
-
-                    <tr>                    <tr>
-
-                        <th>Command</th>                        <th>Command</th>
-
-                        <th>Description</th>                        <th>Description</th>
-
-                    </tr>                    </tr>
-
-                </thead>                </thead>
-
-                <tbody>                <tbody>
-
-                    <tr>                    <tr>
-
-                        <td><code>/market &lt;item&gt;</code></td>                        <td><code>/market &lt;item&gt;</code></td>
-
-                        <td>Get current market prices for an item.</td>                        <td>Get current market prices for an item.</td>
-
-                    </tr>                    </tr>
-
-                    <tr>                    <tr>
-
-                        <td><code>/dscan</code></td>                        <td><code>/dscan</code></td>
-
-                        <td>Opens a pop-up form to paste and analyze d-scan results.</td>                        <td>Opens a pop-up form to paste and analyze d-scan results.</td>
-
-                    </tr>                    </tr>
-
-                    <tr>                    <tr>
-
-                        <td><code>/lp &lt;corporation&gt;</code></td>                        <td><code>/lp &lt;corporation&gt;</code></td>
-
-                        <td>Browse the LP store for a specific NPC corporation.</td>                        <td>Browse the LP store for a specific NPC corporation.</td>
-
-                    </tr>                    </tr>
-
-                    <tr>                    <tr>
-
-                        <td><code>/info &lt;item&gt;</code></td>                        <td><code>/info &lt;item&gt;</code></td>
-
-                        <td>Get a link to detailed information for any item.</td>                        <td>Get a link to detailed information for any item.</td>
-
-                    </tr>                    </tr>
-
-                    <tr>                    <tr>
-
-                        <td><code>/build &lt;item&gt;</code></td>                        <td><code>/build &lt;item&gt;</code></td>
-
-                        <td>Calculate the manufacturing cost for a buildable item.</td>                        <td>Calculate the manufacturing cost for a buildable item.</td>
-
-                    </tr>                    </tr>
-
-                    <tr>                    <tr>
-
-                        <td><code>/help</code></td>                        <td><code>/help</code></td>
-
-                        <td>Displays a list of all available commands.</td>                        <td>Displays a list of all available commands.</td>
-
-                    </tr>                    </tr>
-
-                </tbody>                </tbody>
-
-            </table>            </table>
-
-        </section>        </section>
-
-    </main>    </main>
-
-
-
-    <footer>    <footer>
-
-        <div class="container">        <div class="container">
-
-            <p>RustyBot Discord is an unofficial EVE Online tool. Not affiliated with CCP Games.</p>            <p>RustyBot Discord is an unofficial EVE Online tool. Not affiliated with CCP Games.</p>
-
-            <!-- TODO: Replace '#' with your GitHub repository link -->            <!-- TODO: Replace '#' with your GitHub repository link -->
-
-            <p><a href="#" target="_blank">View on GitHub</a></p>            <p><a href="#" target="_blank">View on GitHub</a></p>
-
-        </div>        </div>
-
-    </footer>    </footer>
-
-
-
-</body></body>
-
-</html></html>
+        :root {
+            --bg-color: #121212;
+            --primary-color: #1e1e1e;
+            --secondary-color: #2a2a2a;
+            --text-color: #e0e0e0;
+            --accent-color: #c97b5a; /* A rusty-orange color sampled from your logo */
+            --header-font: 'Titillium Web', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--header-font);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+        
+        /* Style for the new logo */
+        .logo {
+            max-width: 180px; /* Controls the size of the logo */
+            margin-bottom: 2rem; /* Adds space between the logo and the title */
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header h1 span {
+            color: var(--accent-color);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #b36a4a; /* A slightly darker shade for hover */
+            transform: translateY(-2px);
+        }
+        
+        section {
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--secondary-color);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--primary-color);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--secondary-color);
+            text-align: center;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        .commands-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--primary-color);
+        }
+        
+        .commands-table th, .commands-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+        
+        .commands-table th {
+            font-size: 1.1rem;
+        }
+
+        .commands-table code {
+            background-color: var(--secondary-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+            color: #777;
+        }
+        
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <!-- Your logo is added here -->
+            <img src="logo.png" alt="RustyBot Discord Logo" class="logo">
+            
+            <h1>Welcome to <span>RustyBot Discord</span></h1>
+            <p>Your all-in-one EVE Online market and utility assistant for Discord.</p>
+            <!-- TODO: Replace '#' with your actual bot invite link -->
+            <a href="#" class="cta-button">Add RustyBot Discord to Your Server</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="features">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Real-time Market Data</h3>
+                    <p>Get live market prices for any item from all major EVE trade hubs, including Jita, Amarr, and Dodixie.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>D-Scan Parser</h3>
+                    <p>Paste directional scan results into a clean form and get an instant, categorized breakdown of all ships on scan.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>LP Store Analysis</h3>
+                    <p>Analyze and compare Loyalty Point store offers to find the most profitable items to cash in your LP.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="commands">
+            <h2>Commands</h2>
+            <table class="commands-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/market &lt;item&gt;</code></td>
+                        <td>Get current market prices for an item.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/dscan</code></td>
+                        <td>Opens a pop-up form to paste and analyze d-scan results.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/lp &lt;corporation&gt;</code></td>
+                        <td>Browse the LP store for a specific NPC corporation.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/info &lt;item&gt;</code></td>
+                        <td>Get a link to detailed information for any item.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/build &lt;item&gt;</code></td>
+                        <td>Calculate the manufacturing cost for a buildable item.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/help</code></td>
+                        <td>Displays a list of all available commands.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>RustyBot Discord is an unofficial EVE Online tool. Not affiliated with CCP Games.</p>
+            <!-- TODO: Replace '#' with your GitHub repository link -->
+            <p><a href="#" target="_blank">View on GitHub</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
